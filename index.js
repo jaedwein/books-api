@@ -30,4 +30,13 @@ app.get("/api/books/:id", (req, res) => {
   res.send(books.find((x) => x.id === parseInt(req.params.id)));
 });
 
+app.post("/api/books/addBook", (req, res) => {
+  const book = {
+    id: books.length + 1,
+    title: req.body.title,
+  };
+  books.push(book);
+  res.send(book);
+});
+
 app.listen(8080);
