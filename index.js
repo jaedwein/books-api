@@ -39,4 +39,24 @@ app.post("/api/books/addBook", (req, res) => {
   res.send(book);
 });
 
+app.put("/api/books/:id", (req, res) => {
+  const book = books.find((x) => x.id === parseInt(req.params.id));
+  if (!book) res.status(404).send("Libro no encontrado");
+
+  book.title = req.body.title;
+  res.send(book);
+});
+
+app.delete("/api/books/:id", (req, res) => {
+  const book = books.find((x) => x.id === parseInt(req.params.id));
+  if (!book) {
+    res.status(404).send("Libro no encontrado");
+  } else {
+    //const index = books.indexOf(book);
+    //console.log(index);
+    //const deletedBook = books.splice(index, 1);
+    res.send(books.splice(books.indexOf(book), 1));
+  }
+});
+
 app.listen(8080);
